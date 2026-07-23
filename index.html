@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Assignments</title>
+   <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
+            background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1f1c2c,#000428);
+            background-size:400% 400%;
+            animation:bgMove 12s ease infinite;
+            overflow-x:hidden;
+        }
+
+        @keyframes bgMove{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
+
+        body::before{
+            content:"";
+            position:fixed;
+            width:500px;
+            height:500px;
+            background:#00f7ff;
+            border-radius:50%;
+            filter:blur(180px);
+            top:-150px;
+            left:-150px;
+            opacity:.25;
+        }
+
+        body::after{
+            content:"";
+            position:fixed;
+            width:450px;
+            height:450px;
+            background:#ff00c8;
+            border-radius:50%;
+            filter:blur(180px);
+            bottom:-120px;
+            right:-120px;
+            opacity:.25;
+        }
+
+        .container{
+            width:100%;
+            max-width:900px;
+            background:rgba(255,255,255,.08);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:30px;
+            padding:45px;
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.5),
+                inset 0 0 20px rgba(255,255,255,.08);
+            animation:fade 1s ease;
+        }
+
+        @keyframes fade{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        h1{
+            text-align:center;
+            color:white;
+            font-size:45px;
+            margin-bottom:35px;
+            letter-spacing:2px;
+            text-shadow:
+                0 0 10px cyan,
+                0 0 20px cyan,
+                0 0 40px cyan;
+        }
+
+        a{
+            display:block;
+            text-decoration:none;
+            margin:18px 0;
+            padding:18px 25px;
+            font-size:20px;
+            font-weight:bold;
+            color:white;
+            border-radius:18px;
+            background:linear-gradient(135deg,#00c6ff,#0072ff);
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.4),
+                inset 0 0 10px rgba(255,255,255,.15);
+            transition:.35s;
+            position:relative;
+            overflow:hidden;
+        }
+
+        a::before{
+            content:"";
+            position:absolute;
+            top:0;
+            left:-120%;
+            width:60%;
+            height:100%;
+            background:rgba(255,255,255,.4);
+            transform:skewX(-25deg);
+            transition:.7s;
+        }
+
+        a:hover::before{
+            left:140%;
+        }
+
+        a:hover{
+            transform:translateY(-6px) scale(1.03);
+            background:linear-gradient(135deg,#ff00cc,#3333ff);
+            box-shadow:
+                0 0 20px #00e5ff,
+                0 0 40px #00e5ff,
+                0 20px 40px rgba(0,0,0,.45);
+        }
+
+        a:active{
+            transform:scale(.98);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .container{
+                padding:25px;
+            }
+
+            h1{
+                font-size:30px;
+            }
+
+            a{
+                font-size:17px;
+                padding:15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+<h1>JavaScript Assignments</h1>
+
+<a href="variables.html">Variables</a>
+<a href="Ifelse.html">IF Else </a>
+<a href="IfElseOperators.html">IF Else : 2</a>
+<a href="functions.html">Functions</a>
+<a href="loop.html">Loop</a>
+<a href="Shoppinglist.html">Shopping List</a>
+<a href="arraymethods.html">Array Methods</a>
+<a href="futureeventcountdown.html">Future Event Countdown</a>
+<a href="eventCalculator.html">Event CountDown And Duration Caluculator</a>
+<a href="studentformat.html">Student Bio Format</a>
+
+
+</div>
+
+</body>
+</html>
