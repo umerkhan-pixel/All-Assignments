@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Loop </title>
+</head>
+
+
+<body>
+
+    <h1>LOOP ASSIGNMENT</h1>
+
+
+    <h2>Exercise 1 </h2>
+
+    <input placeholder="Table Number" id="table_number">
+    <input placeholder="Number of Times" id="table_times">
+    <button id="table_btn">Show Table</button>
+    <div id="table_result"></div>
+    <hr>
+    </body>
+
+<script> 
+
+        let tableNumber = document.getElementById("table_number")
+        let tableTimes = document.getElementById("table_times")
+        let tableBtn = document.getElementById("table_btn")
+        let tableResult = document.getElementById("table_result")
+
+        let renderTable = () => {
+
+            let tableValue = tableNumber.value
+            let timesValue = tableTimes.value
+
+            tableResult.innerHTML = ""
+
+            for (let x = 1; x <= timesValue; x++) {
+
+                tableResult.innerHTML += "<p>" + tableValue + " x " + x + " = " + (tableValue * x) + "</p>"
+
+            }
+
+        }
+
+        tableBtn.addEventListener("click", renderTable)
+        </script>
+
+ 
+     <body>
+
+    <h2>Exercise 2 </h2>
+
+    <input placeholder="Enter Number" id="even_number">
+    <button id="even_btn">Show Even Numbers</button>
+    <div id="even_result"></div>
+    <hr>
+    </body>
+
+<script>
+
+        let evenNumber = document.getElementById("even_number")
+        let evenBtn = document.getElementById("even_btn")
+        let evenResult = document.getElementById("even_result")
+
+        let renderEven = () => {
+
+            let number = evenNumber.value
+
+            evenResult.innerHTML = ""
+
+            for (let x = 1; x <= number; x++) {
+
+                if (x % 2 == 0) {
+
+                    evenResult.innerHTML += "<p>" + x + "</p>"
+
+                }
+
+            }
+
+        }
+
+        evenBtn.addEventListener("click", renderEven)
+        </script>
+
+
+    <body>
+
+    <h2>Exercise 3</h2>
+
+    <input  placeholder="Enter Number" id="count_number">
+    <button id="count_btn">Start Countdown</button>
+    <div id="count_result"></div>
+
+    <hr>
+    </body>
+
+<script>    
+
+        let countNumber = document.getElementById("count_number")
+        let countBtn = document.getElementById("count_btn")
+        let countResult = document.getElementById("count_result")
+
+        let renderCount = () => {
+
+            let number = countNumber.value
+
+            countResult.innerHTML = ""
+
+            for (let x = number; x >= 1; x--) {
+
+                countResult.innerHTML += "<p>" + x + "</p>"
+
+            }
+
+        }
+
+        countBtn.addEventListener("click", renderCount)
+        </script>
+
+  
+    <body>
+        
+
+    <h2>Exercise 4 </h2>
+
+    <input placeholder="Enter Number" id="sum_number">
+    <button id="sum_btn">Find Sum</button>
+    <div id="sum_result"></div>
+    <hr>
+    </body>
+
+    <script>
+       
+        let sumNumber = document.getElementById("sum_number")
+        let sumBtn = document.getElementById("sum_btn")
+        let sumResult = document.getElementById("sum_result")
+
+        let renderSum = () => {
+
+            let number = sumNumber.value
+
+            let sum = 0
+
+            for (let x = 1; x <= number; x++) {
+
+                sum = sum + x
+
+            }
+
+            sumResult.innerHTML = "<p>" + sum + "</h3>"
+
+        }
+
+        sumBtn.addEventListener("click", renderSum)
+        </script>
+
+     
+        <body>
+            
+
+            <h2>Exercise 5</h2>
+            <input placeholder="Enter Your Number" id="number">
+            <button id="show_pattern">Show Pattern</button>
+            <div id="result"></div>
+
+            <hr>
+            </body>
+
+            <script>
+ 
+          let patternNumber = document.getElementById("number")
+          let patternBtn = document.getElementById("show_pattern")   
+          let patternResult = document.getElementById("result")     
+          
+          let renderPattern = () => {
+          
+            let number = patternNumber.value
+
+            patternResult.innerHTML = ""
+
+            for (let i = 1; i <= number; i++ ){
+
+                for (let j = 1; j <= i; j++ ){
+
+                    patternResult.innerHTML += j  
+                }
+                patternResult.innerHTML += "/n"
+
+            }
+
+
+          }
+          patternBtn.addEventListener("click", renderPattern)
+            </script>
+    
+</html>

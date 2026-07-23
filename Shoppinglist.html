@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+</head>
+<body>
+    <h2>Shopping List</h2>
+<input placeholder="Enter Item" id="enter_item" />
+<button id="add_item">Add Item</button>
+<div id="list"></div>
+
+<script>
+let enter_item = document.getElementById("enter_item")    
+let list_div = document.getElementById("list") 
+let addBtn = document.getElementById("add_item")
+let items = ["Milk", "Bread", "Eggs", "Rice", "Sugar" ]
+
+let adItem = () => {
+    list_div.innerHTML = ""
+    let enter_item_value = enter_item.value
+    items.push(enter_item_value)
+
+    for ( let x = 0; x < items.length; x++ ){
+        list_div.innerHTML += "<p>" + items[x] + "</p>"
+    }
+
+    enter_item.value = ""
+
+}
+addBtn.addEventListener("click", adItem)
+
+for ( let x = 0; x < 5; x++){
+    list_div.innerHTML += "<p>" + items[x] + "</p>"
+     
+}
+
+</script>
+    
+</body>
+</html>

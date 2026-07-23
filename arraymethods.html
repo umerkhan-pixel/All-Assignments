@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array</title>
+</head>
+<body>
+    <h2>Assignment</h2>
+
+     <div id="container"></div>
+
+<script>
+ 
+    let container_div = document.querySelector("#container")
+
+// 1 QUESTION   
+
+    let cities = ["Karachi", "Hyderabad", "Islamabad", "Lahore", "Pindi", "Multan"]
+    console.log("Q1) Before =>", cities)   
+     //1st Method Push
+    cities.push("Sukkur", "Punjab")
+    console.log("After Push =>", cities)
+    //Display The Updated Array
+    container.innerHTML += `
+        <h3>Question 1</h3>
+        <b>Updated Cities:</b><br>
+        ${cities.join(", ")}
+        <hr>
+        `;
+   
+// 2 QUESTION
+
+    let foods = ["Burger", "Pizza", "Sandwich", "Pasta", "DalChawal", "Karela"]
+    console.log("Q2) Before =>", foods)
+    //2st Method Pop
+    foods.pop()
+    console.log("After Pop =>", foods)
+    //Display The Updated Array
+    container.innerHTML += `
+        <h3>Question 2</h3>
+        <b>Updated Foods:</b><br>
+        ${foods.join(", ")}
+        <hr>
+        `;
+
+// 3 QUESTION
+      
+    let colors = ["Black", "Blue", "Green", "Red", "Golden", "Orange"]
+    console.log("Q3) Before =>", colors)
+    //3rd Method Shift
+     colors.shift()
+    console.log("After Shift =>", colors)
+    //Displaying The Remaining Colours
+    container.innerHTML += `<h3>Question 3</h3>`;
+
+for (let i = 0; i < colors.length; i++) {
+    container.innerHTML += colors[i] + "<br>";
+}
+
+container.innerHTML += "<hr>";
+
+// 4 QUESTION
+
+    let programminglanguages = ["SQL", "TYPESCRIPT", "PYTHON", "JAVASCRIPT", "C++"]
+    console.log("Q4) Before =>",programminglanguages )
+    //4th Method UnShift
+    programminglanguages.unshift("HTML", "CSS")
+    console.log("After Unshift =>",  programminglanguages )
+    //Display The Updated Array
+    container.innerHTML += `
+        <h3>Question 4</h3>
+        <b>Programming Languages:</b><br>
+        ${programminglanguages.join(", ")}
+        <hr>
+        `;
+
+// 5 QUESTION
+
+    let fruits = ["Banana", "Mango", "Apple", "Grapes", "Kiwi", "Guava", "Melon", "Strawberry"]
+    console.log("Q5) Before =>",fruits )
+    //5th Method Slice
+     let newList = fruits.slice(3, 6)
+     console.log("After Slice =>",  newList)
+     //Display Both Arrays
+     container.innerHTML += `
+        <h3>Question 5</h3>
+        <b>Original Array:</b><br>
+        ${fruits.join(", ")}<br><br>
+
+        <b>Copied Array (3rd to 6th):</b><br>
+        ${newList.join(", ")}
+        <hr>
+        `;
+
+ // 6 QUESTION
+ 
+      let animals = ["Cat", "Dog", "Squirrel","Mouse", "Cow", "Goat", "Fox"]
+      console.log("Q6) Before =>", animals)
+     //6th Method Splice
+     animals.splice(2, 0, "Lion", "Tiger")
+     console.log("After Splice =>", animals)
+     //Display The Updated Array
+     container.innerHTML += `
+        <h3>Question 6</h3>
+        <b>Updated Animals:</b><br>
+        ${animals.join(", ")}
+        <hr>
+        `;
+
+// 7 QUESTION
+
+     let carBrands = ["Audi", "BMW", "Toyota", "Hyundai", "Ferrari", "Bugatti"]
+     console.log("Q7) Before =>", carBrands)
+     //Splice
+     carBrands.splice(2, 2)
+     console.log("After Splice =>", carBrands)
+     //Display The Updated Array
+     container.innerHTML += `
+        <h3>Question 7</h3>
+        <b>Updated Car Brands:</b><br>
+        ${carBrands.join(", ")}
+        <hr>
+        `;
+
+
+// 8 QUESTION 
+   
+    let subjects = ["Urdu", "Mathematics", "Physics", "Chemistry", "Biology", "English"]
+    console.log("Q8) Before =>", subjects)
+    //Splice
+    subjects.splice(2, 1, "Computer Science") 
+    console.log("After Splice =>", subjects)
+    //Display The Updated Array
+    container.innerHTML += `
+        <h3>Question 8</h3>
+        <b>Updated Subjects:</b><br>
+        ${subjects.join(", ")}
+        <hr>
+        `;
+
+
+// 9 QUESTION
+
+    let studentnames = ["Umer", "Ali", "Usman", "Junaid", "Jawwad", "Qaim", "Shehzad", "Shehbaz", "Adyan", "Asim"]
+    console.log("Q9) Main Array Of Q9 =>", studentnames)
+
+    //Add 2 new students at the end.
+    studentnames.push("Hammad", "Abbas")
+    console.log("Adding 2 Names =>", studentnames)
+
+    //Remove the first student.
+    //Add "Ahmed" at the beginning
+    studentnames.splice(0, 1, "Ahmed")
+    console.log("Adding Ahmed and Removing First Element =>", studentnames)
+
+    //Remove the last student
+    studentnames.pop()
+    console.log("After Pop =>", studentnames)
+
+    //Display the final array using a for loop
+     container.innerHTML += `<h3>Question 9</h3>`;
+
+for (let x = 0; x < studentnames.length; x++) {
+    container.innerHTML += studentnames[x] + "<br>";
+}
+
+container.innerHTML += "<hr>";
+
+// 10 QUESTION
+ 
+     let mobileBrands = ["Xiaomi", "Qmobile", "Techno","Samsung", "Huawei", "Infinx", "Motorola", "Google Pixel"]
+     console.log("Q10) Main Array Of Q10 =>", mobileBrands)
+
+    //Add "OnePlus" at the end.
+     mobileBrands.push("One Plus")
+     console.log("Added OnePlus =>", mobileBrands)
+
+     //Remove the first brand.
+     //Add "Apple" at the beginning
+     mobileBrands.splice(0, 1, "Apple")
+     console.log("Adding Apple and Removing First One =>", mobileBrands)
+
+     //Copy the last 4 brands into a new array using slice()
+     let newArray = mobileBrands.slice(mobileBrands.length - 4)
+     console.log("Copying Last 4 =>", newArray)
+
+     //Insert "Nothing" after the third element using splice()
+     mobileBrands.splice(3, 0,  "Nothing")
+     console.log("Adding Nothing =>", mobileBrands)
+
+     container.innerHTML += `<h3>Question 10</h3>`;
+        container.innerHTML += `<b>Updated Mobile Brands:</b><br>`;
+
+        for (let x = 0; x < mobileBrands.length; x++) {
+            container.innerHTML += mobileBrands[x] + "<br>";
+        }
+
+        container.innerHTML += "<br><b>Copied Last 4 Brands:</b><br>";
+
+        for (let x = 0; x < newArray.length; x++) {
+            container.innerHTML += newArray[x] + "<br>";
+        }
+
+        container.innerHTML += "<hr>";
+
+//BONUS CHALLENGE
+     
+    let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    console.log("Q11) Bonus Challenge =>", numbers)
+
+    //Add 100 and 200 using push()
+    numbers.push("100", "200")
+    console.log("Used Push =>", numbers)
+
+    //Remove the first number using shift()
+    numbers.shift()
+    console.log("Used Shift =>", numbers)
+
+    //Add 0 at the beginning using unshift()
+    numbers.unshift("0")
+    console.log("Used UnShift =>", numbers)
+
+    //Copy the middle 5 numbers into a new array using slice
+    let newArrays = numbers.slice(3, 8)
+    console.log("Copied Middle 5 =>", newArrays)
+
+    //Replace the 4th number with 999 using splice()
+    numbers.splice(3, 1, "999")
+    console.log("Adding 999 on 4th Place =>", numbers)
+    
+    container.innerHTML += `<h3>Bonus Challenge</h3>`;
+        container.innerHTML += `<b>Final Numbers:</b><br>`;
+
+        for (let x = 0; x < numbers.length; x++) {
+            container.innerHTML += numbers[x] + "<br>";
+        }
+
+        container.innerHTML += "<br><b>Copied Middle 5 Numbers:</b><br>";
+
+        for (let x = 0; x < newArrays.length; x++) {
+            container.innerHTML += newArrays[x] + "<br>";
+        }
+
+        container.innerHTML += "<hr>";
+        
+     </script>
+</body>
+</html>

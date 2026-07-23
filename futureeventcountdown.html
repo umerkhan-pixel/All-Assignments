@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remaining Time</title>
+</head>
+
+<body>
+
+<h1>Remaining Time</h1>
+<input type="date", placeholder="Up-Coming Event" , id="eventInput"/>
+<button id="eventBtn">Remaining Time</button>
+<div id="result"></div>
+    
+</body>
+
+<script>
+let eventInput = document.getElementById("eventInput")
+let eventBtn = document.getElementById("eventBtn")
+let result = document.getElementById("result")
+
+let remainingTime = () => {
+
+    result.innerHTML = ""
+
+    let event = eventInput.value
+
+    let now = new Date ()
+    let eventDate = new Date (event)
+
+     let nowMilliseconds = now.getTime ()
+     let eventMilliseconds = eventDate.getTime ()
+
+     let milliseconds = eventMilliseconds - nowMilliseconds
+
+     let seconds = milliseconds / 1000
+     let minutes = milliseconds / 1000 / 60 
+     let hours = milliseconds / 1000 / 60 / 60 
+     let days = milliseconds / 1000 / 60 / 60 / 24
+
+     result.innerHTML += "<p> Remaining Seconds : " + seconds + "</p>"
+     result.innerHTML += "<p> Remaining Minutes : " + minutes + "</p>"
+     result.innerHTML += "<p> Remaining Hours : " + hours + "</p>"
+     result.innerHTML += "<p> Remaining Days : " + days + "</p>"
+
+        
+}
+eventBtn.addEventListener("click", remainingTime)
+
+</script>
+</html>

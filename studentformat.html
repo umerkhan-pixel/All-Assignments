@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bio Formatter</title>
+</head>
+
+<body>
+
+    <h1>Student Bio Formatter</h1>
+
+    <label>Student Full Name</label><br>
+    <input type="text" id="nameInput"><br><br>
+
+    <label>City</label><br>
+    <input type="text" id="cityInput"><br><br>
+
+    <label>Short Introduction</label><br>
+    <textarea id="introInput"></textarea>
+    <button id="formatBtn">Format Information</button>
+    <button id="checkBtn">Check Name</button>
+
+    <hr>
+
+    <div id="output"></div>
+
+    <script>
+
+        let nameInput = document.getElementById("nameInput")
+        let cityInput = document.getElementById("cityInput")
+        let introInput = document.getElementById("introInput")
+        let formatBtn = document.getElementById("formatBtn")
+        let checkBtn = document.getElementById("checkBtn")
+
+        let output = document.getElementById("output")
+
+        let formatInfo = () => {
+
+            let fullName = nameInput.value.trim()
+            let city = cityInput.value
+            let intro = introInput.value
+            let firstName = fullName.slice(0, fullName.indexOf(" "))
+            let upperName = fullName.toUpperCase()
+            let lowerCity = city.toLowerCase()
+            let newIntro = intro.replaceAll("student", "developer")
+            let shortIntro = newIntro.substring(0, 20)
+
+            output.innerHTML =
+                "<h3>Output</h3>" +
+                "<p><b>Clean Name:</b> " + fullName + "</p>" +
+                "<p><b>Name Length:</b> " + fullName.length + "</p>" +
+                "<p><b>First Name:</b> " + firstName + "</p>" +
+                "<p><b>Uppercase Name:</b> " + upperName + "</p>" +
+                "<p><b>City:</b> " + lowerCity + "</p>" +
+                "<p><b>Updated Introduction:</b> " + newIntro + "</p>" +
+                "<p><b>First 20 Characters:</b> " + shortIntro + "</p>"
+
+        }
+        let checkName = () => {
+
+            let fullName = nameInput.value.trim()
+
+            if (fullName.indexOf("usman") != -1) {
+                alert("usman is present in the name.")
+            }
+            else {
+                alert("usman is not present.")
+            }
+        }
+
+        formatBtn.addEventListener("click", formatInfo)
+        checkBtn.addEventListener("click", checkName)
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+</head>
+<body>
+    <h1>Exercise 1</h1>
+    <h1 id = "marks">50</h1>
+    <button id = "add">Add Marks</button>
+    <button id = "deduct">Deduct Marks</button>
+    
+</body>
+<script>
+ let marksH1 = document.querySelector("#marks")
+let addBtn = document.querySelector("#add")
+let deductBtn = document.querySelector("#deduct")
+console.log (marksH1)
+console.log(addBtn)
+console.log(deductBtn)
+
+ let marks = marksH1.innerHTML
+
+ let increment = ()=> {
+        marksH1.innerHTML = +marksH1.innerHTML + 5 
+    }
+let decrement = ()=> {
+    marksH1.innerHTML -= 5 
+    }
+
+addBtn.addEventListener("click", increment )
+deductBtn.addEventListener("click", decrement )
+
+</script>
+<body>
+
+  <h1>Exercise 2</h1>
+ <h1 id = "age">18</h1>
+ <button id = "plus">BirthDay</button>
+<button id = "minus">Go Back One Year</button>
+</body>
+
+
+<script>
+    let ageH1 = document.querySelector("#age")
+    let BirthdayBtn = document.querySelector("#plus")
+    let GoBackBtn = document.querySelector("#minus")
+console.log (ageH1)
+console.log (BirthdayBtn)
+console.log(GoBackBtn)
+
+let age = ageH1.innerHTML
+ 
+let incrementage = ()=> {
+    age++
+    ageH1.innerHTML = age 
+}
+
+let decrementage = ()=> {
+      age--
+      ageH1.innerHTML = age 
+
+}
+
+BirthdayBtn.addEventListener("click", incrementage)
+GoBackBtn.addEventListener("click", decrementage)
+
+</script>
+
+<body>
+     <h1>Exercise 3 </h1>
+   <h2>Bulb Is Off </h2>
+
+    <button id="onBtn">Turn ON</button>
+    <button id="offBtn">Turn OFF</button>
+</body>
+
+    <script>
+  const heading = document.querySelector("h2");
+
+
+const onButton = document.querySelector("#onBtn");
+const offButton = document.querySelector("#offBtn");
+
+
+function turnOn() {
+    heading.textContent = "Bulb is ON";
+}
+
+
+function turnOff() {
+    heading.textContent = "Bulb is OFF";
+}
+
+
+onButton.addEventListener("click", turnOn);
+offButton.addEventListener("click", turnOff);
+
+    </script>
+
+</html>
+ 
