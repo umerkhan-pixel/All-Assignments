@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Methods - Dice Game</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #1e1e2f;
+        color: #f0f0f5;
+        display: flex;
+        justify-content: center;
+        padding: 30px 10px;
+        margin: 0;
+    }
+    .board {
+        width: 100%;
+        max-width: 900px;
+        text-align: center;
+    }
+    .title {
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+    }
+    .subtitle {
+        color: #a0a0b8;
+        margin-bottom: 25px;
+        font-size: 0.95em;
+    }
+    .row {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .team {
+        background: #2a2a40;
+        border: 2px solid #3d3d5c;
+        border-radius: 14px;
+        padding: 18px;
+        width: 230px;
+        transition: all 0.25s ease;
+        opacity: 0.65;
+    }
+    .team.active {
+        opacity: 1;
+        border-color: #ffd166;
+        box-shadow: 0 0 18px rgba(255, 209, 102, 0.35);
+        transform: translateY(-3px);
+    }
+    .teamA h4 { color: #6fd3ff; }
+    .teamB h4 { color: #ff8a8a; }
+    .teamC h4 { color: #b7ff8a; }
+    .team h4 { margin: 0 0 8px 0; font-size: 1.1em; }
+    .total {
+        font-size: 2.2em;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .stats {
+        font-size: 0.8em;
+        color: #c4c4d8;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+    .stats div span { color: #fff; font-weight: 600; }
+    .dice {
+        width: 90px;
+        height: 90px;
+        background: #f0f0f5;
+        border-radius: 12px;
+        margin: 0 auto 14px auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 4px;
+        padding: 10px;
+        position: relative;
+    }
+    .dice.rolling { animation: shake 0.15s infinite; }
+    @keyframes shake {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(6deg); }
+        100% { transform: rotate(-6deg); }
+    }
+    .pip {
+        background: #1e1e2f;
+        border-radius: 50%;
+        opacity: 0;
+        align-self: center;
+        justify-self: center;
+        width: 14px;
+        height: 14px;
+    }
+    .numeral {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: bold;
+        color: #1e1e2f;
+    }
+    button {
+        background: #ffd166;
+        border: none;
+        color: #1e1e2f;
+        font-weight: bold;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95em;
+        width: 100%;
+    }
+    button:disabled {
+        background: #4a4a63;
+        color: #8a8aa0;
+        cursor: not-allowed;
+    }
+    button:hover:not(:disabled) { background: #ffdd8a; }
+    .banner {
+        margin-top: 26px;
+        font-size: 1.3em;
+        font-weight: bold;
+        min-height: 40px;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: all 0.3s ease;
+    }
+    .banner.show { opacity: 1; transform: translateY(0); }
+    .banner.double { color: #ffd166; }
+    .banner.win { color: #6fffb0; }
+    .reset {
+        margin-top: 16px;
+        width: auto;
+        padding: 10px 26px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="board">
+        <h1 class="title">Number Methods — Dice Game</h1>
+        <p class="subtitle">🎲 12-sided dice · First team to 50 points wins!</p>
+
+        <div class="row">
+            <div class="team teamA active" id="cardA">
+                <h4>Team A</h4>
+                <div class="total"><span id="total_number_1">0</span></div>
+                <div class="stats">
+                    <div>Turns: <span id="turns_1">0</span></div>
+                    <div>Avg: <span id="avg_1">0.00</span></div>
+                    <div>Best: <span id="best_1">-</span> | Worst: <span id="worst_1">-</span></div>
+                </div>
+                <div class="dice" id="dice_1">
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="numeral" id="numeral_1"></div>
+                </div>
+                <button id="roll_dice_1">Roll Dice</button>
+            </div>
+
+            <div class="team teamB" id="cardB">
+                <h4>Team B</h4>
+                <div class="total"><span id="total_number_2">0</span></div>
+                <div class="stats">
+                    <div>Turns: <span id="turns_2">0</span></div>
+                    <div>Avg: <span id="avg_2">0.00</span></div>
+                    <div>Best: <span id="best_2">-</span> | Worst: <span id="worst_2">-</span></div>
+                </div>
+                <div class="dice" id="dice_2">
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="numeral" id="numeral_2"></div>
+                </div>
+                <button id="roll_dice_2">Roll Dice</button>
+            </div>
+
+            <div class="team teamC" id="cardC">
+                <h4>Team C</h4>
+                <div class="total"><span id="total_number_3">0</span></div>
+                <div class="stats">
+                    <div>Turns: <span id="turns_3">0</span></div>
+                    <div>Avg: <span id="avg_3">0.00</span></div>
+                    <div>Best: <span id="best_3">-</span> | Worst: <span id="worst_3">-</span></div>
+                </div>
+                <div class="dice" id="dice_3">
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+                    <div class="numeral" id="numeral_3"></div>
+                </div>
+                <button id="roll_dice_3">Roll Dice</button>
+            </div>
+        </div>
+
+        <div class="banner" id="banner"></div>
+        <button class="reset" id="reset_btn" style="display:none;">Play Again</button>
+    </div>
+
+    <script>
+
+        // ---------- Setup ----------
+        let banner = document.getElementById("banner")
+        let reset_btn = document.getElementById("reset_btn")
+
+        const WIN_SCORE = 50 // Part 2.4: first team to reach this wins immediately
+
+        // pips (index 0-8 on a 3x3 grid) that light up for dice faces 1-6
+        const pipMap = {
+            1: [4],
+            2: [0, 8],
+            3: [0, 4, 8],
+            4: [0, 2, 6, 8],
+            5: [0, 2, 4, 6, 8],
+            6: [0, 2, 3, 5, 6, 8]
+        }
+
+        // Part 3: one config per team instead of copy-pasted variables for each one.
+        // Adding a 4th team later would just mean adding one more object here.
+        const teamConfigs = [
+            { key: "A", label: "Team A", n: 1, cardId: "cardA" },
+            { key: "B", label: "Team B", n: 2, cardId: "cardB" },
+            { key: "C", label: "Team C", n: 3, cardId: "cardC" }
+        ]
+
+        let teams = teamConfigs.map(cfg => ({
+            key: cfg.key,
+            label: cfg.label,
+            cardEl: document.getElementById(cfg.cardId),
+            totalEl: document.getElementById("total_number_" + cfg.n),
+            diceEl: document.getElementById("dice_" + cfg.n),
+            numeralEl: document.getElementById("numeral_" + cfg.n),
+            turnsEl: document.getElementById("turns_" + cfg.n),
+            avgEl: document.getElementById("avg_" + cfg.n),
+            bestEl: document.getElementById("best_" + cfg.n),
+            worstEl: document.getElementById("worst_" + cfg.n),
+            rollBtn: document.getElementById("roll_dice_" + cfg.n),
+            total: 0,
+            turns: 0,
+            best: null,
+            worst: null
+        }))
+
+        let currentIndex = 0
+
+        // ---------- Part 2.1: 12-sided dice ----------
+        let generateNumber = () => {
+            let random = Math.random() * 12
+            random = Math.ceil(random)
+            return random
+        }
+
+        // shows pips for 1-6, or the number as text for 7-12
+        let showFace = (team, number) => {
+            let pips = team.diceEl.querySelectorAll(".pip")
+            if (number <= 6) {
+                team.numeralEl.style.display = "none"
+                team.numeralEl.innerHTML = ""
+                pips.forEach(p => p.style.opacity = 0)
+                pipMap[number].forEach(i => pips[i].style.opacity = 1)
+            } else {
+                pips.forEach(p => p.style.opacity = 0)
+                team.numeralEl.style.display = "flex"
+                team.numeralEl.innerHTML = number
+            }
+        }
+
+        let animateRoll = (team, finalNumber, onDone) => {
+            team.diceEl.classList.add("rolling")
+            let ticks = 0
+            let spin = setInterval(() => {
+                showFace(team, generateNumber())
+                ticks++
+                if (ticks > 8) {
+                    clearInterval(spin)
+                    team.diceEl.classList.remove("rolling")
+                    showFace(team, finalNumber)
+                    onDone()
+                }
+            }, 60)
+        }
+
+        let setActiveTeam = (index) => {
+            teams.forEach((t, i) => {
+                t.cardEl.classList.toggle("active", i === index)
+                t.rollBtn.disabled = i !== index
+            })
+        }
+
+        // Part 2.2 (average) + Part 2.3 (best/worst)
+        let updateTeamDisplay = (team) => {
+            team.totalEl.innerHTML = team.total
+            team.turnsEl.innerHTML = team.turns
+            team.avgEl.innerHTML = team.turns > 0 ? (team.total / team.turns).toFixed(2) : "0.00"
+            team.bestEl.innerHTML = team.best === null ? "-" : team.best
+            team.worstEl.innerHTML = team.worst === null ? "-" : team.worst
+        }
+
+        let showBanner = (text, cls, autoHideMs) => {
+            banner.innerHTML = text
+            banner.classList.add("show")
+            if (cls) banner.classList.add(cls)
+            if (autoHideMs) {
+                setTimeout(() => {
+                    banner.classList.remove("show", cls)
+                    banner.innerHTML = ""
+                }, autoHideMs)
+            }
+        }
+
+        let endGame = (winner) => {
+            teams.forEach(t => {
+                t.rollBtn.disabled = true
+                t.cardEl.classList.remove("active")
+            })
+            showBanner(`🏆 ${winner.label} wins with ${winner.total} points!`, "win")
+            reset_btn.style.display = "block"
+        }
+
+        // Part 2.4: race to 50 (checked after every roll, game can end mid-round)
+        // Part 2.5: rolling a 6 doubles the points earned THAT turn
+        let rollDice = (team) => {
+            team.rollBtn.disabled = true
+            let diceResult = generateNumber()
+
+            animateRoll(team, diceResult, () => {
+                let doubled = diceResult === 6
+                let points = doubled ? diceResult * 2 : diceResult
+
+                team.total += points
+                team.turns += 1
+                if (team.best === null || diceResult > team.best) team.best = diceResult
+                if (team.worst === null || diceResult < team.worst) team.worst = diceResult
+                updateTeamDisplay(team)
+
+                if (doubled) {
+                    showBanner(`🔥 ${team.label} rolled a 6 — Double or Nothing! +${points} this turn!`, "double", 1600)
+                }
+
+                if (team.total >= WIN_SCORE) {
+                    endGame(team)
+                    return
+                }
+
+                currentIndex = (currentIndex + 1) % teams.length
+                setActiveTeam(currentIndex)
+            })
+        }
+
+        teams.forEach(team => {
+            team.rollBtn.addEventListener("click", () => rollDice(team))
+        })
+
+        let resetGame = () => {
+            teams.forEach(team => {
+                team.total = 0
+                team.turns = 0
+                team.best = null
+                team.worst = null
+                updateTeamDisplay(team)
+                showFace(team, 1)
+                team.diceEl.querySelectorAll(".pip").forEach(p => p.style.opacity = 0)
+            })
+            currentIndex = 0
+            setActiveTeam(0)
+            banner.classList.remove("show", "double", "win")
+            banner.innerHTML = ""
+            reset_btn.style.display = "none"
+        }
+
+        reset_btn.addEventListener("click", resetGame)
+
+        // initial state
+        setActiveTeam(0)
+
+    </script>
+</body>
+</html>
