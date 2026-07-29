@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+ 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root{
+    --bg:#090114;
+    --panel:rgba(20,20,35,.88);
+    --panel2:rgba(35,35,55,.9);
+    --cyan:#00f7ff;
+    --purple:#a100ff;
+    --pink:#ff008c;
+    --text:#ffffff;
+    --muted:#b6b6d2;
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+
+    background:
+    linear-gradient(rgba(5,5,20,.80),rgba(5,5,20,.90)),
+    url("https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1800&q=80");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    padding:40px 20px;
+}
+
+h1{
+    text-align:center;
+    font-family:'Orbitron',sans-serif;
+    font-size:55px;
+    color:var(--cyan);
+    text-shadow:
+    0 0 10px var(--cyan),
+    0 0 20px var(--cyan),
+    0 0 40px var(--cyan);
+
+    letter-spacing:3px;
+}
+
+.subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin-top:10px;
+    margin-bottom:35px;
+    font-size:18px;
+}
+
+.intake{
+    max-width:1100px;
+    margin:auto;
+    background:var(--panel);
+    backdrop-filter:blur(12px);
+    border:2px solid var(--cyan);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:
+    0 0 20px rgba(0,247,255,.25);
+}
+
+.intake::before{
+    content:"GAME STORE";
+    float:right;
+    color:var(--pink);
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.intake-fields{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+input{
+    flex:1;
+    min-width:220px;
+
+    padding:14px;
+
+    border:none;
+    outline:none;
+
+    border-radius:10px;
+
+    background:var(--panel2);
+
+    color:white;
+
+    font-size:15px;
+}
+
+input::placeholder{
+    color:#bdbddd;
+}
+
+input:focus{
+    box-shadow:0 0 15px var(--cyan);
+}
+
+button{
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:14px 28px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 15px var(--cyan),
+    0 0 30px var(--purple);
+
+}
+
+#games_list{
+    max-width:1200px;
+
+    margin:40px auto;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    justify-content:center;
+}
+
+.game-card{
+
+    width:260px;
+
+    background:var(--panel);
+
+    border:2px solid rgba(0,247,255,.3);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 0 20px rgba(0,247,255,.15);
+
+}
+
+.game-card:hover{
+
+    transform:translateY(-10px) scale(1.03);
+
+    border-color:var(--cyan);
+
+    box-shadow:
+    0 0 20px var(--cyan),
+    0 0 40px var(--purple);
+
+}
+
+.thumb-wrap{
+
+    height:180px;
+
+    overflow:hidden;
+
+}
+
+.game-card img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.game-card:hover img{
+
+    transform:scale(1.1);
+
+}
+
+.info{
+
+    padding:18px;
+
+}
+
+.name{
+
+    font-size:24px;
+
+    font-family:'Orbitron',sans-serif;
+
+    margin-bottom:12px;
+
+    color:white;
+
+}
+
+.price{
+
+    display:inline-block;
+
+    background:linear-gradient(90deg,var(--purple),var(--pink));
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    color:white;
+
+}
+
+.empty-state{
+
+    width:100%;
+
+    text-align:center;
+
+    padding:50px;
+
+    background:var(--panel);
+
+    border-radius:15px;
+
+    color:#ddd;
+
+    border:2px dashed var(--cyan);
+
+}
+
+@media(max-width:700px){
+
+.intake-fields{
+
+flex-direction:column;
+
+}
+
+button{
+
+width:100%;
+
+}
+
+.game-card{
+
+width:100%;
+
+}
+
+h1{
+
+font-size:38px;
+
+}
+
+}
+</style>
+    </style>
+</head>
+
+<body>
+
+ <body>
+
+    <h1>🎮 Gaming Store</h1>
+    <p class="subtitle">// Buy & Add Your Favorite Games</p>
+
+    <div class="intake">
+
+        <div class="intake-fields">
+
+            <input
+                type="text"
+                id="game_name"
+                placeholder="Game Name">
+
+            <input
+                type="text"
+                id="game_price"
+                placeholder="Game Price (e.g. $59.99)">
+
+            <input
+                type="url"
+                id="game_img"
+                placeholder="Game Cover Image URL">
+
+            <button id="addGameBtn">
+                Add Game
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="games_list"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+    <script>
+// Get Elements
+let games_list = document.getElementById("games_list");
+let game_name = document.getElementById("game_name");
+let game_price = document.getElementById("game_price");
+let game_img = document.getElementById("game_img");
+let add_game_btn = document.getElementById("addGameBtn");
+
+// Game Data
+let games = [
+    {
+        name: "GTA VI",
+        price: "$69.99",
+        thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600"
+    },
+    {
+        name: "EA Sports FC 25",
+        price: "$59.99",
+        thumbnail: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600"
+    },
+    {
+        name: "Minecraft",
+        price: "$29.99",
+        thumbnail: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
+    }
+];
+
+// Display Games
+function renderGames() {
+
+    games_list.innerHTML = "";
+
+    if (games.length === 0) {
+        games_list.innerHTML = `
+        <div class="empty-state">
+            No Games Available
+        </div>`;
+        return;
+    }
+
+    games.forEach((game) => {
+
+        let card = `
+        <div class="game-card">
+
+            <div class="thumb-wrap">
+                <img src="${game.thumbnail}"
+                alt="${game.name}"
+                onerror="this.src='https://placehold.co/260x180/111/fff?text=Game'">
+            </div>
+
+            <div class="info">
+
+                <h2 class="name">${game.name}</h2>
+
+                <span class="price">
+                    ${game.price}
+                </span>
+
+            </div>
+
+        </div>
+        `;
+
+        games_list.innerHTML += card;
+
+    });
+
+}
+
+renderGames();
+
+// Add New Game
+function addGame() {
+
+    if (
+        game_name.value.trim() === "" ||
+        game_price.value.trim() === ""
+    ) {
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    let game = {
+
+        name: game_name.value.trim(),
+
+        price: game_price.value.trim(),
+
+        thumbnail:
+            game_img.value.trim() ||
+            "https://placehold.co/260x180/111/fff?text=Game"
+
+    };
+
+    games.push(game);
+
+    renderGames();
+
+    game_name.value = "";
+    game_price.value = "";
+    game_img.value = "";
+
+    game_name.focus();
+
+}
+
+// Button Click
+add_game_btn.addEventListener("click", addGame);
+
+// Press Enter to Add
+document.addEventListener("keydown", function (e) {
+
+    if (e.key === "Enter") {
+
+        addGame();
+
+    }
+
+});
+    
+    </script>
+
+</html>
